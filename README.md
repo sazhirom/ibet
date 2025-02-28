@@ -964,6 +964,7 @@ Adding environment variables in .bashrc to ensure Kafka and Airflow work properl
 ---
 
 <a id="ibet-grafana"></a>
+
 ## ~~~ 10. Grafana ~~~
 ---  
 
