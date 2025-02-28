@@ -972,6 +972,17 @@ There's not much to showcase about Grafana. It’s a very unique system, quite d
 Configure all visualizations  
 Enable dynamic color changes for multiple parameters using override  
 Publish dashboards via share  
-
 <details>
   <summary><strong>🖼️ Grafana </strong></summary>
+  
+  ![grafana](https://github.com/sazhirom/images/blob/main/ibet/grafana%20overrides.PNG?raw=true)
+
+
+</details>  
+Example Above  
+In the created table:  
+
+Instead of a numerical column, create a text-based one using CASE  
+Add color changes using override  
+Apply mapping for better visualization  
+
