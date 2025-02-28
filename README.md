@@ -1,3 +1,18 @@
+
+---
+<a id="ibet-scrape"></a>
+## ~~~ 1. Data scraping ~~~
+--- 
+
+Data is collected sequentially from three websites and transferred either to Redis or ClickHouse.
+
+Live betting data is sent to Redis for quick calculations and display.
+All data is sent to ClickHouse for dashboards and analytics.
+Below is an example script for scraping data from Parimatch, which has an infinite scroll feature.
+
+Interesting challenge: Data is only updated when displayed on the screen, and this protection cannot be bypassed.
+Solution: A virtual display combined with zoom-out scaling to speed up scanning.
+
 <details>
   <summary><strong>🖼️ Website image</strong></summary>
 
