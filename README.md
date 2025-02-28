@@ -3,6 +3,12 @@
 
   ![Внешний вид сайта](https://raw.githubusercontent.com/sazhirom/images/refs/heads/main/pari-live-section.PNG)
 </details>
+
+<details>
+  <summary><strong>📜 Parimatch</strong></summary>
+
+```python
+
 from bs4 import BeautifulSoup
 from selenium.webdriver.firefox.options import Options
 from selenium.webdriver.firefox.service import Service
