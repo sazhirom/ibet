@@ -727,16 +727,16 @@ For the second node, the settings are almost the same, but you need to change th
 ## ~~~ 6. ClickHouse ~~~
 ---   
 
-Setting up and configuring ClickHouse for stable operation on a server with 2 cores and 4GB of RAM is quite a challenge.
-There are no ready-made examples, and most guides do not regulate CPU threads or core usage properly.
+Setting up and configuring ClickHouse for stable operation on a server with 2 cores and 4GB of RAM is quite a challenge.  
+There are no ready-made examples, and most guides do not regulate CPU threads or core usage properly.  
 
-Key Configuration Strategy:
-The main idea is to strictly limit CPU core and memory usage while ensuring that all settings remain consistent:
+Key Configuration Strategy:  
+The main idea is to strictly limit CPU core and memory usage while ensuring that all settings remain consistent:  
 
-Reduce the number of active threads
-Limit memory consumption
-Adjust resource allocation to match server capabilities
-This approach helps prevent overloading and ensures smooth performance even on a low-resource machine.
+Reduce the number of active threads  
+Limit memory consumption  
+Adjust resource allocation to match server capabilities  
+This approach helps prevent overloading and ensures smooth performance even on a low-resource machine.  
 
 ```xml
 <!-- Concurrent quries -->
@@ -774,15 +774,15 @@ This approach helps prevent overloading and ensures smooth performance even on a
 </storage_configuration>
 ```
 
-⚠️ WARNING: These ClickHouse Settings Will Cause Errors!
+⚠️ WARNING: These ClickHouse Settings Will Cause Errors!  
 
   ![Конфликт с настройками MergeTree](https://github.com/sazhiromru/images/blob/main/ibet/clickhouse_error.PNG?raw=true)  
   
-Issue:
-There is a conflict between reducing CPU cores and the default MergeTree settings.
+Issue:  
+There is a conflict between reducing CPU cores and the default MergeTree settings.  
 
-Solution:
-We need to analyze the logs, understand the exact cause, and check the documentation for MergeTree. Some default MergeTree settings depend on core availability, and they must be explicitly adjusted when limiting CPU usage.
+Solution:  
+We need to analyze the logs, understand the exact cause, and check the documentation for MergeTree. Some default MergeTree settings depend on core availability, and they must be explicitly adjusted when limiting CPU usage.  
 
 ```xml
     <merge_tree>
@@ -792,12 +792,12 @@ We need to analyze the logs, understand the exact cause, and check the documenta
         <number_of_free_entries_in_pool_to_lower_max_size_of_merge>1</number_of_free_entries_in_pool_to_lower_max_size_of_merge>
     </merge_tree>
 ```
-Kafka Integration in ClickHouse
-For storing data via Kafka, ClickHouse requires three tables:
+Kafka Integration in ClickHouse  
+For storing data via Kafka, ClickHouse requires three tables:  
 
-Table for receiving data via KafkaEngine
-Buffer table (intermediate storage)
-Main storage table with MergeTree or another engine
+Table for receiving data via KafkaEngine  
+Buffer table (intermediate storage)  
+Main storage table with MergeTree or another engine  
 
 ```sql
 CREATE TABLE kafka
@@ -866,17 +866,17 @@ ORDER BY timestamp;
 <a id="ibet-postgres"></a>
 ## ~~~ 7. Postgres ~~~
 ---   
-To ensure stable operation, Airflow should use PostgreSQL instead of the default database.
+To ensure stable operation, Airflow should use PostgreSQL instead of the default database.  
 
-⚠️ Even with minimal load, the default Airflow database fails!
-With the default setup, even two DAGs can cause performance issues, and Airflow Scheduler constantly loses connection.
+⚠️ Even with minimal load, the default Airflow database fails!  
+With the default setup, even two DAGs can cause performance issues, and Airflow Scheduler constantly loses connection.  
 
-Steps to configure PostgreSQL for Airflow:
-Install PostgreSQL
-Create a database and table for Airflow
-Add an airflow user
-Grant permissions to the airflow user to insert records
-Modify the Airflow config (airflow.cfg) to use PostgreSQL instead of SQLite
+Steps to configure PostgreSQL for Airflow:  
+Install PostgreSQL  
+Create a database and table for Airflow  
+Add an airflow user  
+Grant permissions to the airflow user to insert records  
+Modify the Airflow config (airflow.cfg) to use PostgreSQL instead of SQLite  
 
 <details>
   <summary><strong>🖼️ Postgres </strong></summary>
@@ -886,7 +886,7 @@ Modify the Airflow config (airflow.cfg) to use PostgreSQL instead of SQLite
 
 </details>  
 
-To allow local users (including Airflow) to connect without a password, you need to adjust the pg_hba.conf file
+To allow local users (including Airflow) to connect without a password, you need to adjust the pg_hba.conf file  
 
 <details>
   <summary><strong>🖼️ Postgres conf </strong></summary>
@@ -902,25 +902,18 @@ To allow local users (including Airflow) to connect without a password, you need
 <a id="ibet-airflow"></a>
 ## ~~~ 8. Airflow ~~~
 ---  
-Airflow requires careful attention to documentation, much like Kafka. It can be unpredictable, with a dedicated section for bugs and workarounds.
+Airflow requires careful attention to documentation, much like Kafka. It can be unpredictable, with a dedicated section for bugs and workarounds.  
 
-For example, Bash commands may not work over SSH, and after hours of debugging, the solution turns out to be adding a space after the command—because... just because. And it works.
+For example, Bash commands may not work over SSH, and after hours of debugging, the solution turns out to be adding a space after the command—because... just because. And it works.  
 
 Step-by-Step Setup:
-✅ Follow the official installation guide  
-
+✅ Follow the official installation guide   
 ✅ Connect PostgreSQL as the backend (with LocalExecutor)  
-
 ✅ Create an Airflow user & disable example DAGs  
-
 ✅ Set up an Airflow service  
-
 ✅ Reduce scheduler_heartbeat_sec in config (lowers CPU load, actually helps!)  
-
 ✅ Install SSH connection support & configure all connections  
-
 ✅ Ensure correct permissions for log & temp directories  
-
 ✅ Create all necessary DAG files & configure schedules  
 
 
@@ -945,12 +938,12 @@ Step-by-Step Setup:
 <a id="ibet-bash"></a>
 ## ~~~ 9. GCP and BASH ~~~
 ---  
-Configuring SSH keys and Google CLI
-Disabling inheritance in Windows
-Using chown to allow programs to write logs
-Setting up Firewall for proper SSH login and enabling Grafana & Airflow Webserver
-Editing visudo so Airflow can run Python without sudo
-Adding environment variables in .bashrc to ensure Kafka and Airflow work properly
+Configuring SSH keys and Google CLI  
+Disabling inheritance in Windows  
+Using chown to allow programs to write logs  
+Setting up Firewall for proper SSH login and enabling Grafana & Airflow Webserver  
+Editing visudo so Airflow can run Python without sudo  
+Adding environment variables in .bashrc to ensure Kafka and Airflow work properly  
 
 <details>
   <summary><strong>🖼️ Bash </strong></summary>
@@ -975,11 +968,11 @@ Adding environment variables in .bashrc to ensure Kafka and Airflow work properl
 ## ~~~ 10. Grafana ~~~
 ---  
 
-There's not much to showcase about Grafana. It’s a very unique system, quite different from Metabase and even more so from Power BI.
+There's not much to showcase about Grafana. It’s a very unique system, quite different from Metabase and even more so from Power BI.  
 
-Configure all visualizations
-Enable dynamic color changes for multiple parameters using override
-Publish dashboards via share
+Configure all visualizations  
+Enable dynamic color changes for multiple parameters using override  
+Publish dashboards via share  
 
 <details>
   <summary><strong>🖼️ Grafana </strong></summary>
