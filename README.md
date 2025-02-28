@@ -646,19 +646,12 @@ Setting up Redis is a straightforward process. In our case, Redis acts as a fast
 We do not require delivery guarantees, but speed and low resource consumption are essential.
 
 Steps:  
-
 Install Redis via apt, then configure redis.conf  
-
 Disable protection mode.  
-
 Set a password.  
-
 Choose a memory management policy.  
-
 Bind Redis to a specific IP address.  
-
 Define the maximum memory usage for messages.  
-  
 Done!  
 
 Since our workload is low, any eviction policy would work, but logically, we choose FIFO using allkeys-lru.
