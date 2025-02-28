@@ -906,8 +906,7 @@ Airflow requires careful attention to documentation, much like Kafka. It can be 
 
 For example, Bash commands may not work over SSH, and after hours of debugging, the solution turns out to be adding a space after the command—because... just because. And it works.  
 
-Step-by-Step Setup:
-✅ Follow the official installation guide   
+Step-by-Step Setup:  
 ✅ Connect PostgreSQL as the backend (with LocalExecutor)  
 ✅ Create an Airflow user & disable example DAGs  
 ✅ Set up an Airflow service  
