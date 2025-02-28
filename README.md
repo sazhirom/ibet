@@ -702,13 +702,19 @@ inter.broker.listener.name=BROKER
 Each server, thanks to KRaft, can act as both a message broker and a controller for metadata management.
 
 Key points:
-We create an alias for both the Broker and Controller.
-In this setup, they run on the same server but use different ports.
-This is a minimal configuration, meaning there is no partitioning or replication.
-The log directory is also set here, and it must have write permissions for Kafka (or you need to change the owner to kafka).
+We create an alias for both the Broker and Controller.  
+
+In this setup, they run on the same server but use different ports.  
+
+This is a minimal configuration, meaning there is no partitioning or replication.  
+
+The log directory is also set here, and it must have write permissions for Kafka (or you need to change the owner to kafka).  
+
 Security & Networking:
-listener.security.protocol.map=BROKER:PLAINTEXT, CONTROLLER:PLAINTEXT sets the encryption protocol. Since we don’t use encryption, it's just PLAINTEXT.
-advertised.listeners defines the address where the server can be reached.
+listener.security.protocol.map=BROKER:PLAINTEXT, CONTROLLER:PLAINTEXT sets the encryption protocol. Since we don’t use encryption, it's just PLAINTEXT.  
+
+advertised.listeners defines the address where the server can be reached.  
+
 The quorum includes both nodes.
 For the second node, the settings are almost the same, but you need to change the IP and node number.
 
@@ -900,14 +906,22 @@ Airflow requires careful attention to documentation, much like Kafka. It can be 
 For example, Bash commands may not work over SSH, and after hours of debugging, the solution turns out to be adding a space after the command—because... just because. And it works.
 
 Step-by-Step Setup:
-✅ Follow the official installation guide
-✅ Connect PostgreSQL as the backend (with LocalExecutor)
-✅ Create an Airflow user & disable example DAGs
-✅ Set up an Airflow service
-✅ Reduce scheduler_heartbeat_sec in config (lowers CPU load, actually helps!)
-✅ Install SSH connection support & configure all connections
-✅ Ensure correct permissions for log & temp directories
-✅ Create all necessary DAG files & configure schedules
+✅ Follow the official installation guide  
+
+✅ Connect PostgreSQL as the backend (with LocalExecutor)  
+
+✅ Create an Airflow user & disable example DAGs  
+
+✅ Set up an Airflow service  
+
+✅ Reduce scheduler_heartbeat_sec in config (lowers CPU load, actually helps!)  
+
+✅ Install SSH connection support & configure all connections  
+
+✅ Ensure correct permissions for log & temp directories  
+
+✅ Create all necessary DAG files & configure schedules  
+
 
 <details>
   <summary><strong>🖼️ Airflow </strong></summary>
